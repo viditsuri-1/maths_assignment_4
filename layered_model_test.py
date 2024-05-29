@@ -7,21 +7,21 @@ from layered_model import define_dense_model_single_layer, define_dense_model_wi
 from layered_model import fit_mnist_model_single_digit, evaluate_mnist_model_single_digit
 from layered_model import binarize_labels, get_mnist_data
 
-# layered_model_test.py
-
-
 
 def test_define_dense_model_single_layer():
     model = define_dense_model_single_layer(43, activation_f='sigmoid', output_length=1)
     assert len(model.layers) == 1, "model should have 1 layer"
     model.build((None, 43))  # Build the model with a sample input shape
-    assert model.layers[0].input_shape == (None, 43), "input_shape is not correct"
+    input_shape = model.input_shape
+    assert input_shape == (None, 43), "input_shape is not correct"
 
 def test_define_dense_model_with_hidden_layer():
     model = define_dense_model_with_hidden_layer(43, activation_func_array=['relu','sigmoid'], hidden_layer_size=11, output_length=1)
     assert len(model.layers) == 2, "model should have 2 layers"
     model.build((None, 43))  # Build the model with a sample input shape
-    assert model.layers[0].input_shape == (None, 43), "input_shape is not correct"
+    input_shape = model.input_shape
+    assert input_shape == (None, 43), "input_shape is not correct"
+
 
 
 def test_fit_and_predict_mnist_single_digit_one_neuron():
